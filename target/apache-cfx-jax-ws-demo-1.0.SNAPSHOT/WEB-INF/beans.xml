@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:jaxws="http://cxf.apache.org/jaxws"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://cxf.apache.org/jaxws http://cxf.apache.org/schemas/jaxws.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.1.xsd">
+
+        <import resource="classpath:META-INF/cxf/cxf.xml" />
+        <context:component-scan base-package="com.cfx.demo"></context:component-scan>
+
+        <jaxws:endpoint 
+          id="helloWorld" 
+          implementor="com.cfx.demo.HelloWorldImpl" 
+          address="/HelloWorld" />
+          
+          
+           <jaxws:endpoint 
+          id="orders" 
+          implementor="com.cfx.demo.orders.DefaultOrdersEndPoint" 
+          address="/services/orders" />
+</beans>

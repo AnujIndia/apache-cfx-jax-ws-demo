@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:order="http://www.allstate.com/services/Order" xmlns:tns="http://www.allstate.com/services/Orders/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="Orders" targetNamespace="http://www.allstate.com/services/Orders/">
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://www.allstate.com/services/Orders/">
+     <xsd:import namespace="http://www.allstate.com/services/Order" schemaLocation="../schema/Order.xsd"></xsd:import>
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="ProcessOrderPlacementRequest">
+    <wsdl:part element="order:orderInquery" name="orderInquery"/>
+  </wsdl:message>
+  <wsdl:message name="ProcessOrderPlacementResponse">
+    <wsdl:part element="order:orderInqueryResponse" name="orderInqueryResponse"/>
+  </wsdl:message>
+  <wsdl:portType name="Orders">
+    <wsdl:operation name="ProcessOrderPlacement">
+      <wsdl:input message="tns:ProcessOrderPlacementRequest"/>
+      <wsdl:output message="tns:ProcessOrderPlacementResponse"/>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="OrdersSOAP" type="tns:Orders">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="ProcessOrderPlacement">
+      <soap:operation soapAction="http://www.allstate.com/services/Orders/ProcessOrderPlacement"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="Orders">
+    <wsdl:port binding="tns:OrdersSOAP" name="OrdersSOAP">
+      <soap:address location="http://localhost:8080/apache-cfx-jax-ws-demo/services/orders"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

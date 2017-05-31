@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	targetNamespace="http://www.allstate.com/services/Order" xmlns:tns="http://www.allstate.com/services/Order"
+	elementFormDefault="qualified">
+
+	<xsd:element name="orderInquery" type="tns:OrderInqueryType"></xsd:element>
+
+	<xsd:complexType name="OrderInqueryType">
+		<xsd:sequence>
+			<xsd:element name="uniqueOrderId" minOccurs="1"
+				maxOccurs="1" type="xsd:int">
+			</xsd:element>
+
+			<xsd:element name="orderQuantity" type="xsd:int"
+				maxOccurs="1" minOccurs="1">
+			</xsd:element>
+			<xsd:element name="accountId" type="xsd:int" maxOccurs="1"
+				minOccurs="1">
+			</xsd:element>
+			<xsd:element name="ena13" type="xsd:double" maxOccurs="1"
+				minOccurs="1"></xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+
+
+	<xsd:complexType name="AccountType">
+		<xsd:sequence>
+			<xsd:element name="accountId" type="xsd:int" maxOccurs="1" minOccurs="1"></xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="BookType">
+		<xsd:sequence>
+			<xsd:element name="ean13" type="xsd:double" maxOccurs="1"
+				minOccurs="1">
+			</xsd:element>
+			<xsd:element name="titile" type="xsd:string" maxOccurs="1" minOccurs="1"></xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+
+
+	<xsd:simpleType name="OrderStatusType">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="READY"></xsd:enumeration>
+			<xsd:enumeration value="FULFILLED"></xsd:enumeration>
+			<xsd:enumeration value="BACKORDER"></xsd:enumeration>
+		</xsd:restriction>
+	</xsd:simpleType>
+	
+	
+
+	<xsd:complexType name="OrderItemType">
+		<xsd:sequence>
+			<xsd:element name="lineNumber" type="xsd:int" maxOccurs="1"
+				minOccurs="1">
+			</xsd:element>
+			<xsd:element name="expectedShipmentDate" type="xsd:date"
+				maxOccurs="1" minOccurs="1">
+			</xsd:element>
+			<xsd:element name="book" type="tns:BookType" maxOccurs="1"
+				minOccurs="1">
+			</xsd:element>
+			<xsd:element name="price" type="xsd:decimal" maxOccurs="1"
+				minOccurs="1">
+			</xsd:element>
+			<xsd:element name="quantityShipped" type="xsd:int" maxOccurs="1" minOccurs="1"></xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="OrderType">
+		<xsd:sequence>
+			<xsd:element name="orderItems" type="tns:OrderItemType"
+				maxOccurs="1" minOccurs="1">
+			</xsd:element>
+			<xsd:element name="orderStatus" type="tns:OrderStatusType" maxOccurs="1" minOccurs="1"></xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+
+
+    <xsd:complexType name="OrderInqueryResponse">
+    	<xsd:sequence>
+    		<xsd:element name="order" type="tns:OrderType"></xsd:element>
+    		<xsd:element name="account" type="tns:AccountType"></xsd:element>
+    	</xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:element name="orderInqueryResponse"
+    	type="tns:OrderInqueryResponse">
+    </xsd:element>
+</xsd:schema>
